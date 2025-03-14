@@ -225,6 +225,44 @@ bool scpi_rp::getAcqAveragingCh(BaseIO *io, EACQChannel channel, bool *enable) {
   return io->readOnOff(enable);
 }
 
+bool scpi_rp::setAcqFilterBypassCh(BaseIO *io, EACQChannel channel,
+                                   bool enable) {
+  constexpr char cmd[] = "ACQ:FILTER:BYPASS:CH";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = " ";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return io->writeOnOff(enable);
+}
+
+bool scpi_rp::getAcqFilterBypassCh(BaseIO *io, EACQChannel channel,
+                                   bool *enable) {
+  constexpr char cmd[] = "ACQ:FILTER:BYPASS:CH";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = "?\r\n";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return io->readOnOff(enable);
+}
+
 bool scpi_rp::setAcqGain(BaseIO *io, EACQChannel channel, EACQGain gain) {
   constexpr char cmd[] = "ACQ:SOUR";
   if (!io->writeStr(cmd)) {

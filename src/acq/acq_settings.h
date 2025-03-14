@@ -27,6 +27,9 @@ bool getAcqAveraging(BaseIO *io, bool *enable);
 bool setAcqAveragingCh(BaseIO *io, EACQChannel channel, bool enable);
 bool getAcqAveragingCh(BaseIO *io, EACQChannel channel, bool *enable);
 
+bool setAcqFilterBypassCh(BaseIO *io, EACQChannel channel, bool enable);
+bool getAcqFilterBypassCh(BaseIO *io, EACQChannel channel, bool *enable);
+
 bool setAcqGain(BaseIO *io, EACQChannel channel, EACQGain gain);
 bool getAcqGain(BaseIO *io, EACQChannel channel, EACQGain *gain);
 

@@ -82,6 +82,16 @@ bool SCPIAcqSettings::averageChQ(EACQChannel channel, bool *enable) {
   return getAcqAveragingCh(m_io, channel, enable);
 }
 
+bool SCPIAcqSettings::filterBypassCh(EACQChannel channel, bool enable) {
+  if (m_io == nullptr) return false;
+  return setAcqFilterBypassCh(m_io, channel, enable);
+}
+
+bool SCPIAcqSettings::filterBypassChQ(EACQChannel channel, bool *enable) {
+  if (m_io == nullptr) return false;
+  return getAcqFilterBypassCh(m_io, channel, enable);
+}
+
 bool SCPIAcqSettings::gain(EACQChannel channel, EACQGain gain) {
   if (m_io == nullptr) return false;
   return setAcqGain(m_io, channel, gain);

@@ -121,7 +121,7 @@ class SCPIAcqSettings {
    *  DEC > 1. Used only in split trigger mode (currently only STEMlab 125-14
    *  4-Input)
    *  @param channel Fast ADC channel
-   *  @param enable urns the mode on or off
+   *  @param enable Turns the mode on or off
    *  @return Returns true if the command was called successfully, returns false
    * for any other problems.
    */
@@ -136,6 +136,24 @@ class SCPIAcqSettings {
    * for any other problems.
    */
   bool averageChQ(EACQChannel channel, bool *enable);
+
+  /*!
+   *  Enable/disable the filter in the FPGA.
+   *  @param channel Fast ADC channel
+   *  @param enable Turns the mode on or off
+   *  @return Returns true if the command was called successfully, returns false
+   * for any other problems.
+   */
+  bool filterBypassCh(EACQChannel channel, bool enable);
+
+  /*!
+   *  Get the filter status.
+   *  @param channel Fast ADC channel
+   *  @param enable Returns the current mode
+   *  @return Returns true if the command was called successfully, returns false
+   * for any other problems.
+   */
+  bool filterBypassChQ(EACQChannel channel, bool *enable);
 
   /*!
    *  Set the gain for the specified channel to HIGH or LOW. (For SIGNALlab
