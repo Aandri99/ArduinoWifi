@@ -29,6 +29,12 @@ bool getGenSweepMode(BaseIO *io, EGENChannel channel, EGENSweepMode *value);
 bool setGenSweepDir(BaseIO *io, EGENChannel channel, EGENSweepDir value);
 bool getGenSweepDir(BaseIO *io, EGENChannel channel, EGENSweepDir *value);
 
+bool setGenSweepRepInf(BaseIO *io, EGENChannel channel, bool infinity);
+bool getGenSweepRepInf(BaseIO *io, EGENChannel channel, bool *infinity);
+
+bool setGenSweepRepCount(BaseIO *io, EGENChannel channel, uint64_t value);
+bool getGenSweepRepCount(BaseIO *io, EGENChannel channel, uint64_t *value);
+
 }  // namespace scpi_rp
 
 #endif

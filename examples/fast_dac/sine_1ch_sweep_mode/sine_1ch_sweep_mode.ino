@@ -37,7 +37,7 @@ void setup() {
   float start = 0;
   float end = 0;
   uint64_t time = 0;
-
+  uint64_t count = 0;
   rp.gen.reset();
   rp.gen.wave(scpi_rp::GEN_CH_1, scpi_rp::SINE);
   rp.gen.amp(scpi_rp::GEN_CH_1, 0.9);
@@ -48,6 +48,8 @@ void setup() {
   rp.gen.sweepFreqEnd(scpi_rp::GEN_CH_1, 100000);
   rp.gen.sweepMode(scpi_rp::GEN_CH_1, scpi_rp::GEN_SWEEP_LOG);
   rp.gen.sweepTime(scpi_rp::GEN_CH_1, 10000000);  // 10 sec
+  rp.gen.sweepInfinity(scpi_rp::GEN_CH_1, false);
+  rp.gen.sweepRepeat(scpi_rp::GEN_CH_1, 42);
 
   if (rp.gen.sweepDirectionQ(scpi_rp::GEN_CH_1, &dir)) {
     Serial.print("Direction = ");
@@ -84,6 +86,19 @@ void setup() {
     Serial.println("Error get time");
   }
 
+  if (rp.gen.sweepInfinityQ(scpi_rp::GEN_CH_1, &state)) {
+    Serial.print("Infinity = ");
+    Serial.println(state);
+  } else {
+    Serial.println("Error get infinity mode");
+  }
+
+  if (rp.gen.sweepRepeatQ(scpi_rp::GEN_CH_1, &count)) {
+    Serial.print("Rep count = ");
+    Serial.println((int)count);
+  } else {
+    Serial.println("Error get rep count");
+  }
   rp.gen.enable(scpi_rp::GEN_CH_1, true);  // Power on CH1
   rp.gen.sync(scpi_rp::GEN_CH_1);
 

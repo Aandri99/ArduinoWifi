@@ -558,17 +558,54 @@ class SCPIGen {
    *  Get sweep mode (either linear or logarithmic).
    *  @param channel Out channel 1/2
    *  @param mode Returns the frequency change mode
+   *  @return Returns true if the command was called successfully, returns
+   * false for any other problems.
+   */
+  bool sweepModeQ(EGENChannel channel, EGENSweepMode *mode);
+
+  /*!
+   *  Enables the infinite signal generation mode, otherwise the number of
+   *  repetitions specified in the sweepRepeatQ function will be made.
+   *  @param channel Out channel 1/2
+   *  @param enable Enables or disables infinite generation mode.
    *  @return Returns true if the command was called successfully, returns false
    * for any other problems.
    */
-  bool sweepModeQ(EGENChannel channel, EGENSweepMode *mode);
+  bool sweepInfinity(EGENChannel channel, bool enable);
+
+  /*!
+   *  Returns generation time in microseconds.
+   *  @param channel Out channel 1/2
+   *  @param enable Returns the current state
+   *  @return Returns true if the command was called successfully, returns false
+   * for any other problems.
+   */
+  bool sweepInfinityQ(EGENChannel channel, bool *enable);
+
+  /*!
+   *  Sets the number of repetitions of sweep signal generation.
+   *  @param channel Out channel 1/2
+   *  @param value Number of repetitions.
+   *  @return Returns true if the command was called successfully, returns false
+   * for any other problems.
+   */
+  bool sweepRepeat(EGENChannel channel, uint64_t value);
+
+  /*!
+   *  Returns the specified number of repetitions.
+   *  @param channel Out channel 1/2
+   *  @param value The value is to store the number of repetitions.
+   *  @return Returns true if the command was called successfully, returns false
+   * for any other problems.
+   */
+  bool sweepRepeatQ(EGENChannel channel, uint64_t *value);
 
   /*!
    *  Set sweep direction (normal (up) or up-down).
    *  @param channel Out channel 1/2
    *  @param mode Sets the frequency change direction mode
-   *  @return Returns true if the command was called successfully, returns false
-   * for any other problems.
+   *  @return Returns true if the command was called successfully, returns
+   * false for any other problems.
    */
   bool sweepDirection(EGENChannel channel, EGENSweepDir mode);
 

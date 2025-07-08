@@ -302,6 +302,26 @@ bool SCPIGen::sweepModeQ(EGENChannel channel, EGENSweepMode *mode) {
   return getGenSweepMode(m_io, channel, mode);
 }
 
+bool SCPIGen::sweepInfinity(EGENChannel channel, bool enable) {
+  if (m_io == nullptr) return false;
+  return setGenSweepRepInf(m_io, channel, enable);
+}
+
+bool SCPIGen::sweepInfinityQ(EGENChannel channel, bool *enable) {
+  if (m_io == nullptr) return false;
+  return getGenSweepRepInf(m_io, channel, enable);
+}
+
+bool SCPIGen::sweepRepeat(EGENChannel channel, uint64_t value) {
+  if (m_io == nullptr) return false;
+  return setGenSweepRepCount(m_io, channel, value);
+}
+
+bool SCPIGen::sweepRepeatQ(EGENChannel channel, uint64_t *value) {
+  if (m_io == nullptr) return false;
+  return getGenSweepRepCount(m_io, channel, value);
+}
+
 bool SCPIGen::sweepDirection(EGENChannel channel, EGENSweepDir mode) {
   if (m_io == nullptr) return false;
   return setGenSweepDir(m_io, channel, mode);

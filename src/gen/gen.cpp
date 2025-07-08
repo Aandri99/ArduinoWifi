@@ -53,16 +53,6 @@ bool scpi_rp::setGenEnableSync(BaseIO *io, bool state) {
 }
 
 bool scpi_rp::getGenEnable(BaseIO *io, EGENChannel channel, bool *state) {
-  auto readValue = [&]() {
-    auto value = io->read();
-    if (value.isValid) {
-      *state = atof(value.value);
-      io->flushCommand(value.next_value);
-      return true;
-    }
-    return false;
-  };
-
   constexpr char cmd[] = "OUTPUT";
   if (!io->writeStr(cmd)) {
     io->writeCommandSeparator();
@@ -77,5 +67,5 @@ bool scpi_rp::getGenEnable(BaseIO *io, EGENChannel channel, bool *state) {
     io->writeCommandSeparator();
     return false;
   }
-  return readValue();
+  return io->readOnOff(state);
 }

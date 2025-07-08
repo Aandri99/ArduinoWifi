@@ -285,6 +285,95 @@ bool scpi_rp::getGenSweepMode(BaseIO *io, EGENChannel channel,
   return false;
 }
 
+bool scpi_rp::setGenSweepRepInf(BaseIO *io, EGENChannel channel,
+                                bool infinity) {
+  constexpr char cmd[] = "SOUR";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = ":SWeep:REP:INF ";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return io->writeOnOff(infinity);
+}
+
+bool scpi_rp::getGenSweepRepInf(BaseIO *io, EGENChannel channel,
+                                bool *infinity) {
+  constexpr char cmd[] = "SOUR";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = ":SWeep:REP:INF?\r\n";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return io->readOnOff(infinity);
+}
+
+bool scpi_rp::setGenSweepRepCount(BaseIO *io, EGENChannel channel,
+                                  uint64_t value) {
+  constexpr char cmd[] = "SOUR";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = ":SWeep:REP:COUNT ";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumberU64(value)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return io->writeCommandSeparator();
+}
+
+bool scpi_rp::getGenSweepRepCount(BaseIO *io, EGENChannel channel,
+                                  uint64_t *_value) {
+  auto readValue = [&]() {
+    auto value = io->read();
+    if (value.isValid) {
+      *_value = io->atou64_dec(value.value);
+      io->flushCommand(value.next_value);
+      return true;
+    }
+    return false;
+  };
+  constexpr char cmd[] = "SOUR";
+  if (!io->writeStr(cmd)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  if (!io->writeNumber(channel)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  constexpr char cmd2[] = ":SWeep:REP:COUNT?\r\n";
+  if (!io->writeStr(cmd2)) {
+    io->writeCommandSeparator();
+    return false;
+  }
+  return readValue();
+}
+
 bool scpi_rp::setGenSweepDir(BaseIO *io, EGENChannel channel,
                              EGENSweepDir mode) {
   constexpr char cmd[] = "SOUR";
