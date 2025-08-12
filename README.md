@@ -4,12 +4,15 @@
 ## Description
 
 Arduino library for controlling Red Pitaya boards via SCPI server.
+The library communicates over any Arduino [`Stream`](https://www.arduino.cc/reference/en/language/functions/communication/stream/),
+so it works with transports such as `EthernetClient`, `WiFiClient`, or serial interfaces.
 
 You can get acquainted with Red Pitaya products [here](https://redpitaya.com).
 Information about SCPI server is located [here](https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/scpi.html).
 
 # Dependencies
  * [Red pitaya boards](https://redpitaya.com/stemlab-125-14/).
+ * An Arduino `Stream` implementation (e.g. Ethernet, WiFi, or Serial) for communication with the SCPI server.
 
 # Contributing
 
