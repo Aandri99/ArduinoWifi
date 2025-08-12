@@ -8,11 +8,13 @@
 
 SCPIRedPitaya	KEYWORD1
 UARTInterface	KEYWORD1
+TCPInterface	KEYWORD1
 UARTProtocol	KEYWORD1
 ESYSLog	KEYWORD1
 SCPISystem	KEYWORD1
 Value KEYWORD1
 BaseIO KEYWORD1
+Transport	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
