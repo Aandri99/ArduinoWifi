@@ -21,11 +21,11 @@ scpi_rp::SCPIRedPitaya rp;
 void setup() {
 #if defined(ARDUINO_ARCH_AVR)
   uart.begin(RED_PITAYA_UART_RATE);
-  rp.initStream(&uart);
+  rp.initStream(scpi_rp::Transport::UART, &uart);
 #elif defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_SAMD) || \
     defined(ARDUINO_ARCH_SAM)
   Serial1.begin(RED_PITAYA_UART_RATE);
-  rp.initStream(&Serial1);
+  rp.initStream(scpi_rp::Transport::UART, &Serial1);
 #endif
   rp.gen.reset();
   rp.gen.wave(scpi_rp::GEN_CH_1, scpi_rp::PWM);

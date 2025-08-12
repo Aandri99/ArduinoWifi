@@ -12,8 +12,9 @@
 #ifndef SCPI_RP_H
 #define SCPI_RP_H
 
-#include <Stream.h>
 #include <stdint.h>
+
+#include "common/base_io.h"
 
 #include "scpi/scpi_rp_acq_common.h"
 #include "scpi/scpi_rp_aio.h"
@@ -35,10 +36,17 @@ class SCPIRedPitaya {
   SCPIRedPitaya();
   ~SCPIRedPitaya();
 
+  enum class Transport { UART, TCP };
+
   /*!
-   *  @param serial Stream for interface.
+   *  Initialize SCPI interface using an already created IO transport.
    */
-  void initStream(Stream *serial);
+  void initStream(BaseIO *io);
+
+  /*!
+   *  Instantiate and initialize transport by type.
+   */
+  void initStream(Transport transport, void *ctx);
 
   SCPIAio aio;
   SCPIDaisy daisy;
