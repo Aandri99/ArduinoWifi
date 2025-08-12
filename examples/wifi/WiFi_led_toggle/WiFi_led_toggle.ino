@@ -1,7 +1,7 @@
 /*
   WiFi LED Toggle
 
-  Demonstrates using WiFi to send SCPI commands to a Red Pitaya board.
+  Demonstrates using the WiFiS3 library to send SCPI commands to a Red Pitaya board.
 
   Network setup:
     * Set the SSID and password below to match your WiFi network.
@@ -9,7 +9,7 @@
     * Ensure the Red Pitaya SCPI server is running and reachable on port 5000.
 */
 
-#include <WiFi.h>
+#include <WiFiS3.h>
 #include "SCPI_RP.h"
 #include "tcp/tcp_scpi.h"
 
